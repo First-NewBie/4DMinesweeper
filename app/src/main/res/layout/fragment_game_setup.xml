@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- ── 크기 설정 섹션 ────────────────────────────────────────── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="크기 설정"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_dialog"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp">
+
+            <!-- X 축 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="X축 (n)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <ImageButton
+                    android:id="@+id/btnXMinus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_minus"
+                    android:tint="@color/accent" />
+
+                <TextView
+                    android:id="@+id/tvNx"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="monospace" />
+
+                <ImageButton
+                    android:id="@+id/btnXPlus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_plus"
+                    android:tint="@color/accent" />
+            </LinearLayout>
+
+            <!-- Y 축 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Y축 (n)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <ImageButton
+                    android:id="@+id/btnYMinus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_minus"
+                    android:tint="@color/accent" />
+
+                <TextView
+                    android:id="@+id/tvNy"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="monospace" />
+
+                <ImageButton
+                    android:id="@+id/btnYPlus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_plus"
+                    android:tint="@color/accent" />
+            </LinearLayout>
+
+            <!-- Z 축 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Z축 (블록 행)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <ImageButton
+                    android:id="@+id/btnZMinus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_minus"
+                    android:tint="@color/accent" />
+
+                <TextView
+                    android:id="@+id/tvNz"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="monospace" />
+
+                <ImageButton
+                    android:id="@+id/btnZPlus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_plus"
+                    android:tint="@color/accent" />
+            </LinearLayout>
+
+            <!-- W 축 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="W축 (블록 열)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <ImageButton
+                    android:id="@+id/btnWMinus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_minus"
+                    android:tint="@color/accent" />
+
+                <TextView
+                    android:id="@+id/tvNw"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="@color/accent"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="monospace" />
+
+                <ImageButton
+                    android:id="@+id/btnWPlus"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_dialog"
+                    android:src="@drawable/ic_plus"
+                    android:tint="@color/accent" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ── 지뢰 비율 섹션 ────────────────────────────────────────── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지뢰 비율"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_dialog"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="지뢰 비율"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvMinePercent"
+                    android:layout_width="52dp"
+                    android:layout_height="wrap_content"
+                    android:text="20%"
+                    android:textColor="@color/accent_flag"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:fontFamily="monospace" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/seekMinePercent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="80"
+                android:progress="15"
+                android:progressTint="@color/accent_flag"
+                android:thumbTint="@color/accent_flag" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5%"
+                    android:textColor="@color/text_disabled"
+                    android:textSize="11sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="85%"
+                    android:textColor="@color/text_disabled"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ── 전체 셀 수 표시 ───────────────────────────────────────── -->
+        <TextView
+            android:id="@+id/tvGridInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전체 81칸 · 지뢰 약 16개"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_marginBottom="28dp" />
+
+        <!-- ── START 버튼 ─────────────────────────────────────────────── -->
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="START"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:textColor="@color/bg_primary"
+            android:backgroundTint="@color/accent" />
+
+    </LinearLayout>
+</ScrollView>
