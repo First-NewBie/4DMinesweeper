@@ -1,6 +1,5 @@
 package com.minesweeper4d
 
-import kotlin.math.abs
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -46,39 +45,47 @@ class GameEngine(
     // ── Generation ────────────────────────────────────────────────────────────
 
     /**
-     * Called on first reveal. Guarantees the first-clicked cell and its 4D
-     * neighbourhood are mine-free.
+     * Called on first reveal.
+     *
+     * Safety guarantees:
+     *  1. The clicked cell itself is always mine-free.
+     *  2. Every cell in the 3×3×3×3 cube centred on the first click is mine-free.
+     *  3. If the safe zone is so large that not all requested mines fit outside it,
+     *     the mine count is silently reduced — mines are NEVER placed inside the
+     *     safe zone as a fallback.
      */
     fun generate(firstCoord: Coord) {
         val totalCells = nx * ny * nz * nw
-        totalMines = ((totalCells * minePercent) / 100).coerceIn(1, totalCells - 1)
 
-        // Candidate positions – exclude a 3³³ cube around first click
-        val candidates = mutableListOf<Coord>()
-        for (x in 0 until nx) for (y in 0 until ny) for (z in 0 until nz) for (w in 0 until nw) {
-            if (abs(x - firstCoord.x) > 1 || abs(y - firstCoord.y) > 1 ||
-                abs(z - firstCoord.z) > 1 || abs(w - firstCoord.w) > 1
+        // Build safe zone: all cells within Chebyshev distance 1 of first click
+        val safeZone = mutableSetOf<Coord>()
+        for (dx in -1..1) for (dy in -1..1) for (dz in -1..1) for (dw in -1..1) {
+            val sx = firstCoord.x + dx
+            val sy = firstCoord.y + dy
+            val sz = firstCoord.z + dz
+            val sw = firstCoord.w + dw
+            if (sx in 0 until nx && sy in 0 until ny &&
+                sz in 0 until nz && sw in 0 until nw
             ) {
-                candidates.add(Coord(x, y, z, w))
+                safeZone.add(Coord(sx, sy, sz, sw))
             }
         }
 
-        candidates.shuffle()
-        val minePositions = candidates.take(minOf(totalMines, candidates.size))
-        minePositions.forEach { c -> cells[c.x][c.y][c.z][c.w].isMine = true }
+        // Cells eligible for mines = everything outside the safe zone
+        val available = mutableListOf<Coord>()
+        for (x in 0 until nx) for (y in 0 until ny) for (z in 0 until nz) for (w in 0 until nw) {
+            val c = Coord(x, y, z, w)
+            if (c !in safeZone) available.add(c)
+        }
 
-        // If we couldn't place enough mines because safe zone was too large,
-        // allow placing in the safe zone (rare for large grids)
-        if (minePositions.size < totalMines) {
-            val remaining = mutableListOf<Coord>()
-            for (x in 0 until nx) for (y in 0 until ny) for (z in 0 until nz) for (w in 0 until nw) {
-                val c = Coord(x, y, z, w)
-                if (c !in minePositions && !cells[x][y][z][w].isMine) remaining.add(c)
-            }
-            remaining.shuffle()
-            remaining.take(totalMines - minePositions.size).forEach { c ->
-                cells[c.x][c.y][c.z][c.w].isMine = true
-            }
+        // Cap mine count: never exceed available positions (handles tiny grids or very high %)
+        val requested = ((totalCells * minePercent) / 100).coerceAtLeast(1)
+        totalMines = requested.coerceAtMost(available.size.coerceAtLeast(1))
+
+        // Place mines — safe zone is strictly never touched
+        available.shuffle()
+        available.take(totalMines).forEach { c ->
+            cells[c.x][c.y][c.z][c.w].isMine = true
         }
 
         // Recalculate adjacency counts
