@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background levels -->
+    <color name="bg_primary">#0F0F0F</color>
+    <color name="bg_surface">#1A1A1A</color>
+    <color name="bg_elevated">#242424</color>
+    <color name="bg_card">#2C2C2C</color>
+
+    <!-- Accent -->
+    <color name="accent">#4FC3F7</color>
+    <color name="accent_dim">#1A4A5A</color>
+    <color name="accent_danger">#EF5350</color>
+    <color name="accent_win">#66BB6A</color>
+    <color name="accent_flag">#FFB300</color>
+
+    <!-- Text -->
+    <color name="text_primary">#EFEFEF</color>
+    <color name="text_secondary">#888888</color>
+    <color name="text_disabled">#444444</color>
+
+    <!-- Cell colors (canvas drawn, referenced in code) -->
+    <color name="cell_unrevealed">#2C2C2C</color>
+    <color name="cell_revealed">#181818</color>
+    <color name="cell_mine">#7B1010</color>
+    <color name="cell_flag_bg">#3A2E00</color>
+    <color name="cell_border">#383838</color>
+    <color name="block_border">#505050</color>
+
+    <!-- Status bar / nav -->
+    <color name="status_bar">#0F0F0F</color>
+</resources>
