@@ -43,4 +43,9 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_n
+          tag_name: build-${{ github.run_number }}
+          name: "4D Minesweeper Build #${{ github.run_number }}"
+          body: "아래 Assets에서 app-debug.apk 를 다운로드하세요."
+          files: app/build/outputs/apk/debug/app-debug.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
