@@ -149,9 +149,9 @@ class GameActivity : AppCompatActivity(), GameViewListener {
             override fun onProgressChanged(sb: SeekBar, p: Int, fromUser: Boolean) {
                 if (!fromUser) return
                 when (gameView.viewMode) {
-                    ViewMode.MODE_3D -> { gameView.changeLayer(newW = p); tvLayerNum.text = p.toString() }
-                    ViewMode.MODE_2D -> { gameView.changeLayer(newZ = p); tvLayerNum.text = p.toString() }
                     ViewMode.MODE_4D -> { gameView.changeLayer(newW = p); tvLayerNum.text = p.toString() }
+                    ViewMode.MODE_3D -> { gameView.changeLayer(newZ = p); tvLayerNum.text = p.toString() }
+                    ViewMode.MODE_2D -> { gameView.changeLayer(newZ = p); tvLayerNum.text = p.toString() }
                 }
             }
             override fun onStartTrackingTouch(sb: SeekBar) {}
@@ -161,28 +161,28 @@ class GameActivity : AppCompatActivity(), GameViewListener {
     }
 
     private fun updateLayerPanel(mode: ViewMode) {
+        rightPanel.visibility = View.VISIBLE
         when (mode) {
             ViewMode.MODE_4D -> {
-                rightPanel.visibility = View.VISIBLE
-                seekLayer.max = (nw - 1).coerceAtLeast(0)
-                tvLayerAxis.text = "w"
-                tvLayerNum.text  = gameView.wSlice.toString()
+                // 4D: single merged cube — layer slider navigates w
+                seekLayer.max      = (nw - 1).coerceAtLeast(0)
                 seekLayer.progress = gameView.wSlice
+                tvLayerAxis.text   = "w"
+                tvLayerNum.text    = gameView.wSlice.toString()
             }
             ViewMode.MODE_3D -> {
-                // In 3D mode with nw>1, slider navigates w (w-slice for the visible cube)
-                rightPanel.visibility = if (nw > 1) View.VISIBLE else View.INVISIBLE
-                seekLayer.max = (nw - 1).coerceAtLeast(0)
-                tvLayerAxis.text = "w"
-                tvLayerNum.text  = gameView.wSlice.toString()
-                seekLayer.progress = gameView.wSlice
+                // 3D: spread cubes — layer slider navigates z (height within cubes)
+                seekLayer.max      = (nz - 1).coerceAtLeast(0)
+                seekLayer.progress = gameView.zSlice
+                tvLayerAxis.text   = "z"
+                tvLayerNum.text    = gameView.zSlice.toString()
             }
             ViewMode.MODE_2D -> {
-                rightPanel.visibility = View.VISIBLE
-                seekLayer.max = (nz - 1).coerceAtLeast(0)
-                tvLayerAxis.text = "z"
-                tvLayerNum.text  = gameView.zSlice.toString()
+                // 2D: staircase — layer slider navigates z (which step is active)
+                seekLayer.max      = (nz - 1).coerceAtLeast(0)
                 seekLayer.progress = gameView.zSlice
+                tvLayerAxis.text   = "z"
+                tvLayerNum.text    = gameView.zSlice.toString()
             }
         }
     }
